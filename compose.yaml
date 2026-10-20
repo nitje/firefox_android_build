@@ -1,0 +1,47 @@
+name: firefox_android_build
+
+services:
+  firefox_build_manager:
+    build:
+      context: ./manager
+    container_name: firefox_android_build_manager
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      DATA_DIR: /data
+      PROJECT_PLATFORM: android-arm64
+      MANAGER_PORT: 48080
+      ANDROID_WORKER_OEM_DIR: /android_worker_oem
+      TZ: ${TZ:-Europe/Berlin}
+    ports:
+      - "${MANAGER_PORT:-48081}:48080"
+    volumes:
+      - ./data:/data
+      - ./android_worker:/android_worker_oem:ro
+    networks:
+      - firefox_android_build
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:48080/health', timeout=3).read()"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 10s
+
+  firefox_android_builder:
+    build:
+      context: ./android_worker
+    container_name: firefox_android_build_worker
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-Europe/Berlin}
+    volumes:
+      - ./data/shared:/data/shared
+      - ./data/android_work:/work
+      - ./data/android_signing:/signing:ro
+    networks:
+      - firefox_android_build
+
+networks:
+  firefox_android_build:
+    name: firefox_android_build
+    driver: bridge

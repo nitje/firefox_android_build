@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ project_title }}</title>
+  <link rel="stylesheet" href="/static/style.css?v={{ app_version }}">
+</head>
+<body>
+<header>
+  <div><h1>{{ project_title }}</h1><p>Projektstand {{ app_version }}</p></div>
+  <span id="workerBadge" class="badge badge-warn">Worker wird geprüft …</span>
+</header>
+<main>
+  <section class="card hero">
+    <div><span class="eyebrow">Aktuellste Firefox-Version</span><h2 id="latestVersion">wird geladen …</h2><p id="latestSource" class="muted">Quelle: Mozilla Product Details</p></div>
+    <button id="refreshLatest" class="secondary">Neu prüfen</button>
+  </section>
+
+{% if project_platform == "windows-x64" %}
+  <details class="card collapsible" id="buildCard" data-card-id="build" open>
+    <summary><h3>Windows x64 bauen</h3><span class="summary-state">Build konfigurieren</span></summary>
+    <div class="card-body">
+      <label for="versionInput">Firefox-Version</label>
+      <div class="row"><input id="versionInput" placeholder="156.0" autocomplete="off"><button id="checkVersion" class="secondary">Prüfen</button></div>
+      <p id="versionHint" class="muted">Geprüft wird das offizielle Mozilla-Source-Archiv des Releases.</p>
+      <label>Build-Profil</label>
+      <div class="notice"><label class="check-row" for="nightlyInput"><input id="nightlyInput" type="checkbox"> Nightly (Branding)</label>
+      <span id="brandingHint" class="small muted">Standard: Release-Branding aus Mozilla-Release-Quellcode; selbst kompiliert, kein offizielles Mozilla-Binary. Markenrechte bei Weitergabe beachten.</span></div>
+      <details class="about-config-panel" id="aboutConfigCard" data-card-id="about-config">
+        <summary><strong>about:config</strong><span class="summary-state" id="aboutConfigCount">Einstellungen werden geladen …</span></summary>
+        <div class="about-config-content">
+          <p class="muted small">Aktivierte Checkboxen werden als bearbeitbare Standardwerte in den Firefox-Build eingebaut. Deaktiviert bedeutet: Firefox-Standard unverändert. Felder und Typen sind bearbeitbar; leere Strings sind erlaubt. Diese Auswahl wird serverseitig gespeichert und pro Build festgehalten.</p>
+          <div id="aboutConfigCategories"></div>
+          <div class="about-config-bottom row">
+            <button type="button" class="secondary" id="aboutConfigAddCategory">＋ Kategorie</button>
+          </div>
+          <p id="aboutConfigStatus" role="status" class="small muted">Einstellungen werden geladen …</p>
+        </div>
+      </details>
+      <details class="about-config-panel" id="bookmarksCard" data-card-id="bookmarks">
+        <summary><strong>Lesezeichen</strong><span class="summary-state" id="bookmarksCount">Lesezeichen werden geladen …</span></summary>
+        <div class="about-config-content">
+          <p class="muted small">Normal bearbeitbare Firefox-Lesezeichen: direkt auf der Lesezeichenleiste oder in einem Ordner. Standard: „About Settings“ mit fünf about:-Seiten (zuerst about:sync-log). Ordner und Auswahl werden serverseitig gespeichert und pro Build festgehalten.</p>
+          <div id="bookmarksEditor"></div>
+          <div class="row bookmarks-toolbar">
+            <button type="button" class="secondary" id="bookmarksAddDirect">＋ Direkt auf Lesezeichenleiste</button>
+            <button type="button" class="secondary" id="bookmarksAddFolder">＋ Ordner erstellen</button>
+          </div>
+          <div class="row bookmarks-import">
+            <input type="file" id="bookmarksImportFile" accept=".html,.htm,.json,text/html,application/json" aria-label="Lesezeichen importieren (Firefox-HTML oder Manager-JSON)">
+            <select id="bookmarksImportMode" aria-label="Importmodus"><option value="append">Ergänzen (ohne Duplikate)</option><option value="replace">Vorhandene Einträge ersetzen</option></select>
+            <button type="button" class="secondary" id="bookmarksImport">Importieren</button>
+            <button type="button" class="secondary" id="bookmarksExport">JSON exportieren</button>
+          </div>
+          <p class="muted small">Import: Firefox-Lesezeichenexport als HTML oder JSON dieser Card. Firefox-Backups (.jsonlz4) werden nicht unterstützt. Mehrstufige HTML-Ordner werden für die Firefox-Policy zu einem Ordnernamen zusammengefasst.</p>
+          <p class="small muted" id="bookmarksStatus" role="status">Lesezeichen werden geladen …</p>
+        </div>
+      </details>
+      <button id="buildButton" class="primary" disabled>Build erstellen</button>
+      <p id="buildMessage" class="muted"></p>
+    </div>
+  </details>
+{% endif %}
+
+{% if project_platform == "android-arm64" %}
+  <details class="card collapsible" id="androidBuildCard" data-card-id="android-build">
+    <summary><h3 id="androidCardTitle">Android bauen</h3><span class="summary-state" id="androidBuildSummary">Fenix · ARM64 · Debug-APK</span></summary>
+    <div class="card-body">
+      <label for="androidVersionInput">Firefox-Version (Android)</label>
+      <div class="row"><input id="androidVersionInput" placeholder="156.0" autocomplete="off"><button id="androidCheckVersion" class="secondary" type="button">Prüfen</button></div>
+      <p class="muted small" id="androidVersionHint">Geprüft wird das offizielle Mozilla-Release-Source-Archiv.</p>
+
+      <label>Build-Typ</label>
+      <div class="android-build-types" role="radiogroup" aria-label="Android Build-Typ">
+        <label class="radio-card"><input type="radio" name="androidBuildType" value="debug" checked><span><strong>Debug</strong><small>Installierbare Fenix-Debug-APK mit Gradle-Debugsignatur.</small></span></label>
+        <label class="radio-card"><input type="radio" name="androidBuildType" value="release"><span><strong>Release</strong><small>Optimierte Fenix-Release-APK, signiert mit deinem eigenen persistenten Keystore.</small></span></label>
+      </div>
+      <p class="muted small" id="androidReleaseHint">Debug kann parallel zur normalen Firefox-App installiert werden.</p>
+
+      <details class="about-config-panel" id="androidAboutConfigCard" data-card-id="android-about-config">
+        <summary><strong>about:config</strong><span class="summary-state" id="androidAboutConfigCount">Einstellungen werden geladen …</span></summary>
+        <div class="about-config-content">
+          <p class="muted small">Android/Fenix verwendet hierfür eigene App-Einstellungen und nicht die Desktop-about:config-Schlüssel. Aktivierte Werte werden als Fenix-Startvorgabe in diesen Build eingebaut. Deaktiviert bedeutet: Mozilla/Fenix-Standard unverändert.</p>
+          <details class="pref-category" open>
+            <summary><strong>Sync Server</strong><span class="summary-state">Fenix / Mozilla Account</span></summary>
+            <div class="pref-category-body android-sync-prefs">
+              <div class="android-pref-row" id="androidAccountServerRow">
+                <input class="pref-check" id="androidAccountServerEnabled" type="checkbox" aria-label="Benutzerdefinierten Mozilla-Kontoserver aktivieren">
+                <label for="androidAccountServerValue">Benutzerdefinierter Mozilla-Kontoserver</label>
+                <input id="androidAccountServerValue" type="url" spellcheck="false" autocomplete="off" value="https://accounts.firefox.com">
+              </div>
+              <div class="android-pref-row" id="androidSyncServerRow">
+                <input class="pref-check" id="androidSyncServerEnabled" type="checkbox" aria-label="Benutzerdefinierten Sync-Server aktivieren">
+                <label for="androidSyncServerValue">Benutzerdefinierter Sync-Server</label>
+                <input id="androidSyncServerValue" type="url" spellcheck="false" autocomplete="off" value="https://token.services.mozilla.com/1.0/sync/1.5">
+              </div>
+            </div>
+          </details>
+          <p id="androidAboutConfigStatus" role="status" class="small muted">Einstellungen werden geladen …</p>
+        </div>
+      </details>
+
+      <div class="notice android-signing-box">
+        <h4>Release-Signierung</h4>
+        <dl id="androidSigningDetails"><dt>Keystore</dt><dd>wird geprüft …</dd></dl>
+        <div class="row android-signing-actions">
+          <button type="button" id="androidSigningGenerate" class="secondary">Eigenen Keystore erzeugen</button>
+          <button type="button" id="androidSigningExport" class="secondary" disabled>Keystore exportieren</button>
+        </div>
+        <label for="androidSigningBackupPassword">Backup-Passwort <span class="muted small">(mindestens 12 Zeichen)</span></label>
+        <input id="androidSigningBackupPassword" type="password" autocomplete="new-password" placeholder="Nur für Import/Export; wird nicht gespeichert">
+        <div class="row android-signing-import">
+          <input id="androidSigningImportFile" type="file" accept=".zip,application/zip">
+          <button type="button" id="androidSigningImport" class="secondary">Keystore importieren</button>
+        </div>
+        <label class="check-row"><input id="androidSigningReplace" type="checkbox"><span>Vorhandenen Keystore beim Import ausdrücklich ersetzen</span></label>
+        <p class="muted small" id="androidSigningMessage" role="status">Der Release-Key liegt nur persistent unter <code>./data/android_signing</code> und ist nicht Bestandteil des Docker-Images oder Update-ZIPs.</p>
+      </div>
+
+      <p class="muted small">Desktop-about:config und „Lesezeichen“ / policies.json werden weiterhin <strong>nicht</strong> auf Android übertragen. Der Android-Bereich oben verwendet ausschließlich native Fenix-Einstellungen.</p>
+      <button type="button" id="androidBuildButton" class="primary" disabled>Android-Build erstellen</button>
+      <p id="androidBuildMessage" class="muted" role="status"></p>
+    </div>
+  </details>
+
+  <details class="card collapsible" id="androidWorkerCard" data-card-id="android-worker">
+    <summary><h3>Android-Worker</h3><span id="androidWorkerSummary" class="summary-state">wird geprüft …</span></summary>
+    <div class="card-body">
+      <dl id="androidWorkerDetails"></dl>
+      <div class="notice">Eigener Linux-x86_64-Container (kein Windows-Worker). Persistente Quellen, SDK/NDK, Gradle und Objektdateien: <code>./data/android_work</code>. APKs und Logs erscheinen in der gemeinsamen Versionsverwaltung.</div>
+      <p class="muted small" id="androidWorkerMessage" role="status">Der Manager aktualisiert den Android-Worker im Leerlauf selbst. Das einmalige Compose-Update auf die Supervisor-Version benötigt kein Host-Skript.</p>
+    </div>
+  </details>
+
+{% endif %}
+
+{% if project_platform == "windows-x64" %}
+  <details class="card collapsible" id="workerCard" data-card-id="worker" open>
+    <summary><h3>Windows-Worker</h3><span id="workerSummary" class="summary-state">wird geprüft …</span></summary>
+    <div class="card-body">
+      <dl id="workerDetails"></dl>
+      <div class="notice"><strong>Dev Drive Note:</strong> Für Windows 11 ist ein separates zweites Laufwerk vorgesehen. Der Worker versucht dieses als <code>D:</code>-Dev-Drive einzurichten und verwendet <code>D:\mozilla-source</code> und <code>D:\firefox-builds</code>.</div>
+      <div class="row"><button id="finalizeWorkerButton" class="secondary">Worker-Dateien reparieren</button></div>
+      <p id="workerMessage" class="muted small"></p>
+    </div>
+  </details>
+
+{% endif %}
+
+  <details class="card collapsible" id="queueCard" data-card-id="queue" open>
+    <summary><h3>Build-Warteschlange</h3><span id="queueSummary" class="summary-state">wird geladen …</span></summary>
+    <div class="card-body"><dl id="queueDetails"></dl></div>
+  </details>
+
+  <details class="card collapsible" id="versionsCard" data-card-id="versions" open>
+    <summary><h3>Versionsverwaltung</h3><span class="summary-state">Builds & Artefakte</span></summary>
+    <div class="card-body">
+      <div class="row end"><button id="refreshBuilds" class="secondary">Aktualisieren</button></div>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Plattform</th><th>Status</th><th>Erstellt</th><th>Aktionen</th></tr></thead><tbody id="buildRows"><tr><td colspan="5">wird geladen …</td></tr></tbody></table></div>
+    </div>
+  </details>
+
+  <details class="card collapsible" id="logCard" data-card-id="log">
+    <summary><h3>Kurzlog</h3><span id="logMeta" class="summary-state">Kein Build ausgewählt</span></summary>
+    <div class="card-body"><div class="row end log-actions"><a id="logDownload" class="button-link secondary" href="#" download hidden>Vollständige Diagnose herunterladen (ZIP)</a></div><pre id="logBox">Noch kein Build ausgewählt.</pre></div>
+  </details>
+</main>
+{% if project_platform == "windows-x64" %}
+<dialog id="editPrefsDialog" class="pref-modal" aria-labelledby="editPrefsTitle">
+  <div class="pref-modal-head"><h2 id="editPrefsTitle">about:config bearbeiten</h2><button class="secondary" type="button" id="editPrefsCancel">Schließen</button></div>
+  <div class="pref-modal-scroll" id="editPrefsScroll">
+    <p class="notice" id="editPrefsWarning"></p>
+    <p class="muted small" id="editPrefsSnapshot"></p>
+    <p class="muted small">Checkbox aus = kein zusätzlicher Wert. Boolean, Number und String sind editierbar. Neue Kategorien können frei benannt werden.</p>
+    <div id="editPrefsCategories"></div>
+    <div class="row about-config-bottom"><button type="button" class="secondary" id="editPrefsAddCategory">＋ Kategorie</button></div>
+  </div>
+  <div class="pref-modal-footer"><span class="summary-state" id="editPrefsCount"></span><span id="editPrefsStatus" class="small muted" role="status"></span><button type="button" class="primary" id="editPrefsSave">Speichern &amp; ZIP aktualisieren</button></div>
+</dialog>
+<dialog id="editBookmarksDialog" class="pref-modal" aria-labelledby="editBookmarksTitle">
+  <div class="pref-modal-head"><h2 id="editBookmarksTitle">Lesezeichen bearbeiten</h2><button type="button" class="secondary" id="editBookmarksCancel">Schließen</button></div>
+  <p class="notice">Die Lesezeichen des ausgewählten Builds werden übernommen. Beim Speichern wird nur das ZIP neu gepackt; Firefox wird nicht neu kompiliert. Bestehende Profillesezeichen werden nicht ersetzt.</p>
+  <p class="muted small" id="editBookmarksSnapshot"></p>
+  <div id="editBookmarksEditor"></div>
+  <div class="row bookmarks-toolbar"><button type="button" class="secondary" id="editBookmarksAddDirect">＋ Direkt auf Lesezeichenleiste</button><button type="button" class="secondary" id="editBookmarksAddFolder">＋ Ordner erstellen</button></div>
+  <div class="pref-modal-footer"><span id="editBookmarksCount" class="summary-state"></span><span id="editBookmarksStatus" class="small muted" role="status"></span><button type="button" class="primary" id="editBookmarksSave">Speichern &amp; ZIP aktualisieren</button></div>
+</dialog>
+{% endif %}
+<script>window.APP_VERSION={{ app_version|tojson }};</script>
+<script>window.PROJECT_PLATFORM={{ project_platform|tojson }};</script>
+{% if project_platform == "windows-x64" %}
+<script src="/static/about-config.js?v={{ app_version }}"></script>
+<script src="/static/bookmarks.js?v={{ app_version }}"></script>
+{% endif %}
+<script src="/static/app.js?v={{ app_version }}"></script>
+</body></html>

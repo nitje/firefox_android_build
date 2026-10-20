@@ -1,0 +1,460 @@
+{
+  "schema": 1,
+  "categories": [
+    {
+      "id": "telemetry",
+      "title": "Telemetrie & Datenübertragung",
+      "rows": [
+        {
+          "id": "3637c42a-0ec9-47be-ae7d-c579fa8a85ab",
+          "enabled": true,
+          "name": "datareporting.healthreport.uploadEnabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "518a0600-5f5a-45cd-9c81-d9866a80abfa",
+          "enabled": true,
+          "name": "datareporting.policy.dataSubmissionEnabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "f652d34c-87fb-4687-891b-96f57ca57863",
+          "enabled": true,
+          "name": "datareporting.usage.uploadEnabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "584487f5-070c-406c-86b8-454998f32b87",
+          "enabled": true,
+          "name": "toolkit.telemetry.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "bc3f7e27-4099-454f-a4ae-7cc4ab13628a",
+          "enabled": true,
+          "name": "toolkit.telemetry.unified",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "58f4f69e-d40f-4cc0-a1d0-332a6ac6734b",
+          "enabled": true,
+          "name": "toolkit.telemetry.newProfilePing.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "73d91878-32d5-4d5a-8702-cd376565418d",
+          "enabled": true,
+          "name": "toolkit.telemetry.updatePing.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "9c9d84c5-1062-4198-a1ec-c71ebc9308eb",
+          "enabled": true,
+          "name": "toolkit.telemetry.bhrPing.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "4eb2232e-c0f4-4ef2-845f-f6e07d7ac877",
+          "enabled": true,
+          "name": "toolkit.telemetry.firstShutdownPing.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "5ee63076-d419-4958-afa4-0e73d787bf6e",
+          "enabled": true,
+          "name": "toolkit.telemetry.shutdownPingSender.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "coverage",
+      "title": "Coverage",
+      "rows": [
+        {
+          "id": "2cd0534c-6308-4173-90e0-82061acf3434",
+          "enabled": true,
+          "name": "toolkit.telemetry.coverage.opt-out",
+          "type": "Boolean",
+          "value": true,
+          "note": ""
+        },
+        {
+          "id": "a79b3a86-d415-4826-8f28-1d761bbb2115",
+          "enabled": true,
+          "name": "toolkit.coverage.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": ""
+        },
+        {
+          "id": "dea97777-770b-4e2c-a06a-72f3310a9765",
+          "enabled": true,
+          "name": "toolkit.coverage.endpoint.base",
+          "type": "String",
+          "value": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "normandy",
+      "title": "Normandy & Studien",
+      "rows": [
+        {
+          "id": "7883a5c3-cd2c-42de-b129-34512e52386f",
+          "enabled": true,
+          "name": "app.normandy.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "94b2c285-50a0-43c0-8c7e-23179edb99b7",
+          "enabled": true,
+          "name": "app.normandy.api_url",
+          "type": "String",
+          "value": "",
+          "note": ""
+        },
+        {
+          "id": "a912257f-dc38-4960-b212-ed77a65aa96b",
+          "enabled": true,
+          "name": "app.shield.optoutstudies.enabled",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "crash",
+      "title": "Absturzberichte",
+      "rows": [
+        {
+          "id": "a1d16b0e-936a-4038-a583-aa0d65ba6afe",
+          "enabled": true,
+          "name": "breakpad.reportURL",
+          "type": "String",
+          "value": "",
+          "note": ""
+        },
+        {
+          "id": "30ef2850-1231-443c-9890-c315f5724949",
+          "enabled": true,
+          "name": "browser.tabs.crashReporting.sendReport",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "sponsored",
+      "title": "Gesponserte Inhalte",
+      "rows": [
+        {
+          "id": "0cc13318-b354-4d1d-bf33-ccec4398662e",
+          "enabled": true,
+          "name": "browser.newtabpage.activity-stream.showSponsored",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "4d4f7296-2a35-4f37-9849-1340c0e16912",
+          "enabled": true,
+          "name": "browser.newtabpage.activity-stream.showSponsoredTopSites",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "ac6ab833-d9cf-43c5-b7fa-5c917a058f74",
+          "enabled": true,
+          "name": "browser.newtabpage.activity-stream.feeds.section.topstories",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "67bcf340-d84f-498b-a67d-b7a6928ee115",
+          "enabled": true,
+          "name": "browser.newtabpage.activity-stream.showWeather",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "ef12a6c4-bcaa-4726-920e-7732f0ae548d",
+          "enabled": true,
+          "name": "browser.newtabpage.activity-stream.feeds.topsites",
+          "type": "Boolean",
+          "value": false,
+          "note": "Verknüpfungen / Shortcuts auf der Firefox-Startseite und in neuen Tabs ausblenden. Lesezeichen werden nicht gelöscht."
+        },
+        {
+          "id": "6fd861f1-7f71-4113-ac84-e10367c7515a",
+          "enabled": false,
+          "name": "browser.partnerlink.attributionURL",
+          "type": "String",
+          "value": "https://topsites.services.mozilla.com/cid/",
+          "note": ""
+        },
+        {
+          "id": "b8c053cc-0f4c-4d3c-87c0-ee063f4faa7c",
+          "enabled": false,
+          "name": "browser.partnerlink.campaign.topsites",
+          "type": "String",
+          "value": "amzn_2020_a1",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "network",
+      "title": "Netzwerk & Prefetch",
+      "rows": [
+        {
+          "id": "bebd194c-da9e-43c8-96de-5f04e76bf120",
+          "enabled": true,
+          "name": "network.dns.disablePrefetch",
+          "type": "Boolean",
+          "value": true,
+          "note": ""
+        },
+        {
+          "id": "6cc27a74-8d9a-415f-9542-2d4e72a8722c",
+          "enabled": true,
+          "name": "network.prefetch-next",
+          "type": "Boolean",
+          "value": false,
+          "note": ""
+        },
+        {
+          "id": "032ebaf0-ee37-4bb8-aa70-00f165980e68",
+          "enabled": true,
+          "name": "network.http.speculative-parallel-limit",
+          "type": "Number",
+          "value": 0,
+          "note": ""
+        },
+        {
+          "id": "7f5f0f55-53b4-4141-9f23-ebe7f33f5067",
+          "enabled": true,
+          "name": "network.http.referer.XOriginPolicy",
+          "type": "Number",
+          "value": 0,
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "hotspot",
+      "title": "Hotspot & Captive Portal",
+      "rows": [
+        {
+          "id": "f1453f50-421e-4c6b-a236-5f81e271533e",
+          "enabled": true,
+          "name": "network.captive-portal-service.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": "Hotspot-Erkennung nicht mehr möglich, wenn FALSE gesetzt wird."
+        }
+      ]
+    },
+    {
+      "id": "media_compat",
+      "title": "Medien-Kompatibilität",
+      "open": false,
+      "rows": [
+        {
+          "id": "7026048e-54df-549b-a4ca-c0d87a5baab2",
+          "enabled": false,
+          "name": "media.hardware-video-decoding.failed",
+          "type": "Boolean",
+          "value": false,
+          "note": "WARNUNG: Nur bei einer nachgewiesenen Fehlblockierung des Hardware-Sanity-Tests aktivieren. Auf anderen Geräten kann ein tatsächliches Decoderproblem vorliegen. Nach Änderung Firefox vollständig neu starten."
+        },
+        {
+          "id": "bfd29a6e-4f8c-5ce4-ba21-bb741634f3c1",
+          "enabled": true,
+          "name": "media.hevc.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": "HEVC benötigt unter Windows gegebenenfalls die Microsoft HEVC-Videoerweiterung; diese wird nicht im Firefox-ZIP mitgeliefert."
+        },
+        {
+          "id": "620a508b-3cc6-5b4b-9569-7f127301e00d",
+          "enabled": true,
+          "name": "media.wmf.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": "Windows Media Foundation muss auf dem Ziel-Windows verfügbar sein."
+        },
+        {
+          "id": "2df367ed-e177-56fc-ac17-3190d7bd0d96",
+          "enabled": true,
+          "name": "media.hardware-video-decoding.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": "Hardwarebeschleunigung benötigt unterstützte GPU, passende Treiber und einen funktionierenden Decoder."
+        },
+        {
+          "id": "109cc1f4-946e-5038-b4b5-496bd325bbb2",
+          "enabled": true,
+          "name": "dom.media.webcodecs.h265.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": "Betrifft WebCodecs. Allein diese Einstellung aktiviert nicht automatisch HEVC in HTML5/MSE."
+        }
+      ]
+    },
+    {
+      "id": "sync_server",
+      "title": "Sync Server",
+      "open": false,
+      "rows": [
+        {
+          "id": "fd2054ed-4847-57d4-80c6-0a894f2523ef",
+          "enabled": false,
+          "name": "identity.fxaccounts.auth.uri",
+          "type": "String",
+          "value": "https://api.accounts.firefox.com/v1",
+          "note": ""
+        },
+        {
+          "id": "8bc10ea0-e90a-575a-8a6e-11578a71cd17",
+          "enabled": false,
+          "name": "identity.fxaccounts.autoconfig.uri",
+          "type": "String",
+          "value": "",
+          "note": ""
+        },
+        {
+          "id": "c6265b28-1887-5abd-ab44-d127c6a3f9c0",
+          "enabled": false,
+          "name": "identity.fxaccounts.remote.oauth.uri",
+          "type": "String",
+          "value": "https://oauth.accounts.firefox.com/v1",
+          "note": ""
+        },
+        {
+          "id": "ecef2c3c-23cc-5809-a41f-eb861195cb06",
+          "enabled": false,
+          "name": "identity.fxaccounts.remote.profile.uri",
+          "type": "String",
+          "value": "https://profile.accounts.firefox.com/v1",
+          "note": ""
+        },
+        {
+          "id": "04ba7dea-217e-5917-93e2-6c9f8095c377",
+          "enabled": false,
+          "name": "identity.fxaccounts.remote.root",
+          "type": "String",
+          "value": "https://accounts.firefox.com/",
+          "note": ""
+        },
+        {
+          "id": "b668ab63-4448-5742-a825-5816647d3149",
+          "enabled": false,
+          "name": "identity.fxaccounts.pairing.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": ""
+        },
+        {
+          "id": "25dc2f9e-06c5-504a-95c4-defb7d857278",
+          "enabled": false,
+          "name": "services.sync.log.appender.file.logOnSuccess",
+          "type": "Boolean",
+          "value": true,
+          "note": "DEBUG ONLY!"
+        }
+      ]
+    },
+    {
+      "id": "webrtc",
+      "title": "WebRTC – standardmäßig unverändert",
+      "rows": [
+        {
+          "id": "d684d8f2-88c9-46b6-8508-c4910a02bcbb",
+          "enabled": false,
+          "name": "media.peerconnection.ice.default_address_only",
+          "type": "Boolean",
+          "value": false,
+          "note": "Kamerasteuerung kann eingeschränkt sein, wenn TRUE gesetzt wird."
+        },
+        {
+          "id": "10fad2ff-23ce-41f5-b5f3-3fd79247215b",
+          "enabled": false,
+          "name": "media.peerconnection.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": "Video-/Sprachanrufe nicht mehr möglich, aber Schutz gegen WebRTC/STUN-IP-Leaks, wenn FALSE gesetzt wird. Eine vollständige VPN-Leak-Garantie ist das nicht."
+        }
+      ]
+    },
+    {
+      "id": "fingerprinting",
+      "title": "Fingerprinting – standardmäßig unverändert",
+      "rows": [
+        {
+          "id": "dfeeed6a-5dcc-422b-8d0b-c8af708178c3",
+          "enabled": false,
+          "name": "privacy.resistFingerprinting",
+          "type": "Boolean",
+          "value": false,
+          "note": "Komfort eingeschränkt (UTC, Dark-/Day-Modus, mögliche falsche OS-Downloads), wenn TRUE gesetzt wird. Alternative: Einstellungen → Datenschutz & Sicherheit → Streng."
+        },
+        {
+          "id": "8428f05d-efef-432f-bf98-803ec06b68cd",
+          "enabled": false,
+          "name": "privacy.firstparty.isolate",
+          "type": "Boolean",
+          "value": false,
+          "note": "Wenn TRUE, stärkere Website-Isolation mit möglichen Login-/Komforteinschränkungen."
+        }
+      ]
+    },
+    {
+      "id": "clipboard",
+      "title": "Zwischenablage – standardmäßig unverändert",
+      "rows": [
+        {
+          "id": "b9371775-b43d-48ee-9e69-d0eb8e5aae80",
+          "enabled": false,
+          "name": "dom.event.clipboardevents.enabled",
+          "type": "Boolean",
+          "value": true,
+          "note": "Wenn FALSE, erhalten Webseiten keine Clipboard-Events. Normales Kopieren/Einfügen wird dadurch nicht grundsätzlich abgeschaltet; manche Webseitenfunktionen können ausfallen."
+        }
+      ]
+    },
+    {
+      "id": "custom",
+      "title": "Eigene Einträge",
+      "rows": []
+    }
+  ]
+}
